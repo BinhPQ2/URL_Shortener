@@ -7,8 +7,8 @@ const UrlShortener = () => {
     const [timeLeft, setTimeLeft] = useState(null);
     const [error, setError] = useState(null);
 
-    const BACKEND_URL = `${process.env.REACT_APP_API_URL}/shorten/`;
-    // const BACKEND_URL = "http://127.0.0.1:8000/api/shorten/";
+    // const BACKEND_URL = `${process.env.REACT_APP_API_URL}/shorten/`;
+    const BACKEND_URL = "http://127.0.0.1:8000/api/shorten/";
     console.log(BACKEND_URL);
 
     // Wrap calculateTimeLeft in useCallback
@@ -51,8 +51,8 @@ const UrlShortener = () => {
 
             if (response.ok) {
                 const data = await response.json();
-                // setShortUrl(`http://127.0.0.1:8000/api/${data.short_code}/`);
-                setShortUrl(`${process.env.REACT_APP_API_URL}/${data.short_code}/`);
+                setShortUrl(`http://127.0.0.1:8000/api/${data.short_code}/`);
+                // setShortUrl(`${process.env.REACT_APP_API_URL}/${data.short_code}/`);
                 setExpirationDate(data.expiration_date);  // Set expiration date
             } else {
                 const errorData = await response.json();

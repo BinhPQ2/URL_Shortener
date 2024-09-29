@@ -58,7 +58,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  
-    "https://url-shortener-mu-six.vercel.app/",
+    "https://url-shortener-mu-six.vercel.app",
 ]
 
 # CORS_ALLOW_ALL_ORIGINS = True  # Temporarily allow all domains
