@@ -15,11 +15,13 @@ def shorten_url(request):
         existing_url = Url.objects.filter(original_url=original_url).first()
         
         if existing_url:
-            # Check if it has expired
             if existing_url.expiration_date and existing_url.expiration_date > timezone.now():
-                return Response({'original_url': existing_url.original_url, 'short_code': existing_url.short_code}, status=200)
+                return Response({
+                    'original_url': existing_url.original_url,
+                    'short_code': existing_url.short_code,
+                    'expiration_date': existing_url.expiration_date
+                }, status=200)
             else:
-                # If expired, delete and create a new one
                 existing_url.delete()
 
         # Create a new shortened URL
@@ -28,7 +30,8 @@ def shorten_url(request):
             url_instance = serializer.save()
             return Response({
                 'original_url': url_instance.original_url,
-                'short_code': url_instance.short_code
+                'short_code': url_instance.short_code,
+                'expiration_date': url_instance.expiration_date
             }, status=201)
 
         return Response(serializer.errors, status=400)
