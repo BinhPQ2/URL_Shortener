@@ -59,7 +59,7 @@ const UrlShortener = () => {
                 setError(errorData);
             }
         } catch (err) {
-            setError("An error occurred. Please try again.");
+            setError("An error occurred. Please try again." + err);
         }
     };
 
