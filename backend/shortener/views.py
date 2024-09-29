@@ -5,6 +5,12 @@ from rest_framework.response import Response
 from .models import Url
 from .serializers import UrlSerializer
 from django.shortcuts import redirect
+from django.shortcuts import render
+
+
+# Home page view
+def homepage(request):
+    return render(request, 'homepage.html')
 
 @api_view(['POST'])
 def shorten_url(request):
