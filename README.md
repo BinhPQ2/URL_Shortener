@@ -65,3 +65,32 @@ Your submission will be evaluated based on:
 - Focus on core functionality over perfect styling.
 - Commit your code regularly to show progress.
 - If you run out of time, document the features you would add or improve given more time.
+
+---------------------------------------------------------
+
+# URL Shortener Backend
+
+This is a simple URL shortener backend built with Django and React, allowing users to submit long URLs and get a shortened URL. The application includes an expiration feature, so shortened URLs expire after a certain period.
+
+## Features
+
+- Submit long URLs and receive a unique, shortened URL.
+- Each submission generates a new short code, even for duplicate URLs.
+- Expiration system for shortened URLs (5 minutes).
+- Redirects users to the original URL when accessing the shortened URL.
+- Displays a message if the link has expired.
+- Simple backend homepage with access to the Django admin panel.
+
+## Technology Choices
+
+- **Backend**: Django (Python) with Django REST Framework.
+- **Frontend**: React (JavaScript) for submitting long URLs.
+- **Database**: SQLite (easy to set up for development, can be switched to PostgreSQL for production).
+- **Deployment**: Heroku (for the backend), Vercel (for the frontend)
+  
+## Setup Instructions
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/your-repo/url-shortener-backend.git
