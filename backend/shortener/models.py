@@ -12,13 +12,19 @@ class Url(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.short_code:
-            self.short_code = ''.join(random.choices(string.ascii_letters + string.digits, k=6))
-        
-        # Set expiration date if not already set
+            # Generate a unique short code, ensuring no collisions
+            self.short_code = self.generate_unique_short_code()
+
+        # Set a default expiration date if not provided
         if not self.expiration_date:
             self.expiration_date = timezone.now() + timedelta(seconds=60)
-        
+
         super(Url, self).save(*args, **kwargs)
+
+    def generate_unique_short_code(self):
+        """Generate a unique 6-character short code."""
+        short_code = ''.join(random.choices(string.ascii_letters + string.digits, k=6))
+        return short_code
 
     def __str__(self):
         return self.original_url

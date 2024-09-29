@@ -4,9 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Url
 from .serializers import UrlSerializer
-from django.shortcuts import redirect
-from django.shortcuts import render
-
+from django.shortcuts import redirect, render
 
 # Home page view
 def homepage(request):
@@ -17,21 +15,14 @@ def shorten_url(request):
     if request.method == 'POST':
         original_url = request.data.get('original_url')
 
-        # Check if the URL already exists
-        existing_url = Url.objects.filter(original_url=original_url).first()
-        
-        if existing_url:
-            if existing_url.expiration_date and existing_url.expiration_date > timezone.now():
-                return Response({
-                    'original_url': existing_url.original_url,
-                    'short_code': existing_url.short_code,
-                    'expiration_date': existing_url.expiration_date
-                }, status=200)
-            else:
-                existing_url.delete()
+        # Check if original_url is provided
+        if not original_url:
+            return Response({"error": "Original URL is required."}, status=400)
 
-        # Create a new shortened URL
-        serializer = UrlSerializer(data=request.data)
+        # Create a new shortened URL without checking for duplicates
+        data = {'original_url': original_url}
+
+        serializer = UrlSerializer(data=data)
         if serializer.is_valid():
             url_instance = serializer.save()
             return Response({
@@ -46,18 +37,18 @@ def shorten_url(request):
 def redirect_url(request, short_code):
     try:
         url = Url.objects.get(short_code=short_code)
-        
+
         # Check if the URL has expired
         if url.expiration_date and url.expiration_date < timezone.now():
             return render(request, 'error.html', {
-                'title': 'Oops! You should have been quicker!',
+                'title': 'Oops! This link has expired.',
                 'message': "It looks like the link you're trying to access is no longer valid."
             }, status=status.HTTP_410_GONE)  # Render the error page for expired links
 
         return redirect(url.original_url)  # Redirect to the original URL
+
     except Url.DoesNotExist:
         return render(request, 'error.html', {
-            'title': 'Are you lost?',
+            'title': '404 Not Found',
             'message': "The URL you're trying to access does not exist."
         }, status=status.HTTP_404_NOT_FOUND)  # Render the error page for URL not found
-

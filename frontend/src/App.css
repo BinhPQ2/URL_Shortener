@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.url-shortener {
+  padding: 20px; /* Adds padding inside the gray container */
+  background-color: #d3d6da; /* Light gray background */
+  border-radius: 25px; /* Rounded corners for a softer look */
+}
+
+

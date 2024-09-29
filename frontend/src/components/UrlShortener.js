@@ -7,8 +7,8 @@ const UrlShortener = () => {
     const [timeLeft, setTimeLeft] = useState(null);
     const [error, setError] = useState(null);
 
-    // const BACKEND_URL = `${process.env.REACT_APP_API_URL}/shorten/`;
     const BACKEND_URL = "http://127.0.0.1:8000/api/shorten/";
+    // const BACKEND_URL = `${process.env.REACT_APP_API_URL}/shorten/`;
     console.log(BACKEND_URL);
 
     // Wrap calculateTimeLeft in useCallback
@@ -79,7 +79,7 @@ const UrlShortener = () => {
     };
 
     return (
-        <div className="url-shortener container mt-5">
+        <div className="url-shortener container mt-15">
             <form className="form-group" onSubmit={handleSubmit}>
                 <label htmlFor="url-input">Enter Long URL:</label>
                 <input
@@ -108,7 +108,7 @@ const UrlShortener = () => {
 
             {timeLeft && timeLeft !== 0 ? (
                 <div className="countdown mt-4">
-                    <p>Time left: {timeLeft.minutes} minutes and {timeLeft.seconds} seconds</p>
+                    <p> The link will expire after: {timeLeft.minutes} minutes and {timeLeft.seconds} seconds</p>
                 </div>
             ) : (
                 shortUrl && (

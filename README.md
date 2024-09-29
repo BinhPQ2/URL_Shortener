@@ -76,7 +76,7 @@ This is a simple URL shortener backend built with Django and React, allowing use
 
 - Submit long URLs and receive a unique, shortened URL.
 - Each submission generates a new short code, even for duplicate URLs.
-- Expiration system for shortened URLs (5 minutes).
+- Expiration system for shortened URLs.
 - Redirects users to the original URL when accessing the shortened URL.
 - Displays a message if the link has expired.
 - Simple backend homepage with access to the Django admin panel.
