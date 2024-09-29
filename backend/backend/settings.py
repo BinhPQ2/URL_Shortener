@@ -57,8 +57,11 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # Adjust this if your frontend runs on a different port
+    "http://localhost:3000",  
+    "https://url-shortener-mu-six.vercel.app/",
 ]
+
+# CORS_ALLOW_ALL_ORIGINS = True  # Temporarily allow all domains
 
 ROOT_URLCONF = 'backend.urls'
 

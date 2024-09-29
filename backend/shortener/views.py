@@ -47,10 +47,11 @@ def redirect_url(request, short_code):
     try:
         url = Url.objects.get(short_code=short_code)
         
-        # Check for expiration
+        # Check if the URL has expired
         if url.expiration_date and url.expiration_date < timezone.now():
-            return Response({"error": "This link has expired."}, status=410)  # HTTP 410 for expired resource
-        
+            return render(request, 'expired.html', status=status.HTTP_410_GONE)  # Render the expired page
+
         return redirect(url.original_url)  # Redirect to the original URL
     except Url.DoesNotExist:
-        return Response(status=404)  # URL not found
+        return Response(status=status.HTTP_404_NOT_FOUND)  # URL not found
+
