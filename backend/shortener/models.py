@@ -16,7 +16,7 @@ class Url(models.Model):
         
         # Set expiration date if not already set
         if not self.expiration_date:
-            self.expiration_date = timezone.now() + timedelta(seconds=5)
+            self.expiration_date = timezone.now() + timedelta(seconds=60)
         
         super(Url, self).save(*args, **kwargs)
 

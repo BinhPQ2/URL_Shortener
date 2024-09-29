@@ -50,14 +50,14 @@ def redirect_url(request, short_code):
         # Check if the URL has expired
         if url.expiration_date and url.expiration_date < timezone.now():
             return render(request, 'error.html', {
-                'title': 'Oops! This link has expired.',
+                'title': 'Oops! You should have been quicker!',
                 'message': "It looks like the link you're trying to access is no longer valid."
             }, status=status.HTTP_410_GONE)  # Render the error page for expired links
 
         return redirect(url.original_url)  # Redirect to the original URL
     except Url.DoesNotExist:
         return render(request, 'error.html', {
-            'title': '404 Not Found',
+            'title': 'Are you lost?',
             'message': "The URL you're trying to access does not exist."
         }, status=status.HTTP_404_NOT_FOUND)  # Render the error page for URL not found
 
