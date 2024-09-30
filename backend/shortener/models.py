@@ -12,10 +12,8 @@ class Url(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.short_code:
-            # Generate a unique short code, ensuring no collisions
             self.short_code = self.generate_unique_short_code()
 
-        # Set a default expiration date if not provided
         if not self.expiration_date:
             self.expiration_date = timezone.now() + timedelta(seconds=60)
 

@@ -6,7 +6,6 @@ from .models import Url
 from .serializers import UrlSerializer
 from django.shortcuts import redirect, render
 
-# Home page view
 def homepage(request):
     return render(request, 'homepage.html')
 
@@ -15,11 +14,9 @@ def shorten_url(request):
     if request.method == 'POST':
         original_url = request.data.get('original_url')
 
-        # Check if original_url is provided
         if not original_url:
             return Response({"error": "Original URL is required."}, status=400)
-
-        # Create a new shortened URL without checking for duplicates
+        
         data = {'original_url': original_url}
 
         serializer = UrlSerializer(data=data)
@@ -40,15 +37,17 @@ def redirect_url(request, short_code):
 
         # Check if the URL has expired
         if url.expiration_date and url.expiration_date < timezone.now():
-            return render(request, 'error.html', {
+            context = {
                 'title': 'Oops! This link has expired.',
                 'message': "It looks like the link you're trying to access is no longer valid."
-            }, status=status.HTTP_410_GONE)  # Render the error page for expired links
+            }
+            return render(request, 'error.html', context, status=status.HTTP_410_GONE)  
 
-        return redirect(url.original_url)  # Redirect to the original URL
+        return redirect(url.original_url)
 
     except Url.DoesNotExist:
-        return render(request, 'error.html', {
+        context = {
             'title': '404 Not Found',
             'message': "The URL you're trying to access does not exist."
-        }, status=status.HTTP_404_NOT_FOUND)  # Render the error page for URL not found
+        }
+        return render(request, 'error.html', context, status=status.HTTP_404_NOT_FOUND)  

@@ -7,11 +7,9 @@ const UrlShortener = () => {
     const [timeLeft, setTimeLeft] = useState(null);
     const [error, setError] = useState(null);
 
-    const BACKEND_URL = "http://127.0.0.1:8000/api/shorten/";
-    // const BACKEND_URL = `${process.env.REACT_APP_API_URL}/shorten/`;
+    const BACKEND_URL = `${process.env.REACT_APP_API_URL}/shorten/`;
     console.log(BACKEND_URL);
 
-    // Wrap calculateTimeLeft in useCallback
     const calculateTimeLeft = useCallback(() => {
         if (!expirationDate) return;
         const now = new Date();
@@ -25,17 +23,16 @@ const UrlShortener = () => {
             const seconds = Math.floor((diff / 1000) % 60);
             setTimeLeft({ minutes, seconds });
         }
-    }, [expirationDate]); // Add expirationDate as a dependency
+    }, [expirationDate]);
 
-    // useEffect hook to run the countdown timer
+    // Countdown timer
     useEffect(() => {
         if (expirationDate) {
             const intervalId = setInterval(calculateTimeLeft, 1000);
-            return () => clearInterval(intervalId);  // Cleanup interval on unmount
+            return () => clearInterval(intervalId);
         }
-    }, [expirationDate, calculateTimeLeft]); // Add calculateTimeLeft here
+    }, [expirationDate, calculateTimeLeft]);
 
-    // Function to handle form submission and shorten the URL
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(null);
@@ -51,9 +48,8 @@ const UrlShortener = () => {
 
             if (response.ok) {
                 const data = await response.json();
-                setShortUrl(`http://127.0.0.1:8000/api/${data.short_code}/`);
-                // setShortUrl(`${process.env.REACT_APP_API_URL}/${data.short_code}/`);
-                setExpirationDate(data.expiration_date);  // Set expiration date
+                setShortUrl(`${process.env.REACT_APP_API_URL}/${data.short_code}/`);
+                setExpirationDate(data.expiration_date);
             } else {
                 const errorData = await response.json();
                 setError(errorData);
@@ -63,19 +59,19 @@ const UrlShortener = () => {
         }
     };
 
-    // Function to copy short URL to clipboard
+    // Copy short URL to clipboard
     const copyToClipboard = () => {
         navigator.clipboard.writeText(shortUrl).then(() => {
             alert('Short URL copied to clipboard!');
         });
     };
 
-    // Function to handle the reload (regenerate a new short code)
+    // Handle the reload when time run out
     const handleReload = () => {
-        setLongUrl('');  // Reset the input
-        setShortUrl('');  // Clear the short URL
-        setExpirationDate(null);  // Clear expiration
-        setTimeLeft(null);  // Reset timer
+        setLongUrl(''); 
+        setShortUrl(''); 
+        setExpirationDate(null);  
+        setTimeLeft(null);  
     };
 
     return (

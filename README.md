@@ -1,96 +1,126 @@
-# URL_Shortener
+# URL Shortener Website
+This project is a simple URL shortener with a ReactJS frontend and a Django backend. The project allows users to submit long URLs, generate shortened URLs that will expired after a set amount of time.
 
-## Core Requirements
+## 🚀 Live Demo
+
+- **Frontend URL**: [https://url-shortener-mu-six.vercel.app/](https://url-shortener-mu-six.vercel.app/)
+- **Backend URL**: [https://url-shorterner-binhpq-f721b6699005.herokuapp.com/](https://url-shorterner-binhpq-f721b6699005.herokuapp.com/)
+
+## A. Completed and Pending Features
+
+✅ - Completed features
+⚠️ - Works in progress
+❌ - Have not implement
 
 ### 1. Frontend:
-- Implement a form to submit long URLs.
-- Display the generated short URL after submission.
-- Include a "Copy to Clipboard" button for the short URL.
-- Implement basic styling for a clean, responsive design.
+
+✅ Implement a form to submit long URLs.
+✅ Display the generated short URL after submission.
+✅ Include a "Copy to Clipboard" button for the short URL.
+✅ Implement basic styling for a clean, responsive design.
 
 ### 2. Backend:
-- Create an API endpoint to receive long URLs and return shortened versions.
-- Implement a redirect service to handle requests for shortened URLs.
-- Generate unique short codes for each submitted URL.
-- Allow duplicate long URLs (each submission should create a new short URL).
+
+✅ Create an API endpoint to receive long URLs and return shortened versions.
+✅ Implement a redirect service to handle requests for shortened URLs.
+✅ Generate unique short codes for each submitted URL.
+✅ Allow duplicate long URLs (each submission should create a new short URL).
 
 ### 3. Database:
-- Store mappings between short codes and original URLs.
-- Save creation dates for each shortened URL.
+
+✅ Store mappings between short codes and original URLs.
+✅ Save creation dates for each shortened URL.
 
 ### 4. Deployment:
-- Deploy the application to a publicly accessible platform.
-- Provide instructions for running the project locally.
 
-## Nice-to-have Features
-If time permits, consider implementing one or more of these optional features:
-1. **Password Protection**: Allow users to set a password for accessing certain shortened URLs.
-2. **URL Expiry Date**: Enable users to set an expiration date for shortened URLs.
-3. **Custom Short Codes**: Allow users to specify their own custom short codes.
+✅ Deploy the application to a publicly accessible platform.
+✅ Provide instructions for running the project locally (below).
 
-## Technical Specifications
-- **Frontend**: ReactJS
-- **Backend**: Any technology of your choice (e.g., Node.js, Python)
-- **Database**: Any database system (e.g., SQLite, MongoDB, PostgreSQL)
+### 5. Nice-to-have Features:
 
-## Submission Requirements
-1. **Source Code**
-   - Provide a link to a GitHub repository containing your project code.
-   - Ensure the repository is public or grant access to the provided email.
-   
-2. **README File**
-   - Include setup instructions.
-   - Explain your technology choices.
-   - List completed features.
-   - Document any known issues or limitations.
-   - Suggest ideas for future improvements.
+❌ Password Protection: Allow users to set a password for accessing certain shortened URLs.
+⚠️ URL Expiry Date: Enable users to set an expiration date for shortened URLs. (Currently the expired date is set to default of 60 seconds and user can't toggle it off)
+❌ Custom Short Codes: Allow users to specify their own custom short codes.
 
-3. **Deployed Application**
-   - Provide the URL of your deployed, publicly accessible application.
+---
 
-## Evaluation Criteria
-Your submission will be evaluated based on:
-1. Functionality and completeness of core features.
-2. Code quality, organization, and best practices.
-3. Effective use of React for frontend development.
-4. Appropriate backend architecture and API design.
-5. Database design and data management.
-6. Error handling and input validation.
-7. Successful deployment and accessibility.
-8. Quality and clarity of documentation.
-9. Implementation of nice-to-have feature (if attempted).
-
-## Important Notes
-- You are responsible for obtaining and using your own API keys for external services.
-- Focus on core functionality over perfect styling.
-- Commit your code regularly to show progress.
-- If you run out of time, document the features you would add or improve given more time.
-
----------------------------------------------------------
-
-# URL Shortener Backend
-
-This is a simple URL shortener backend built with Django and React, allowing users to submit long URLs and get a shortened URL. The application includes an expiration feature, so shortened URLs expire after a certain period.
-
-## Features
-
-- Submit long URLs and receive a unique, shortened URL.
-- Each submission generates a new short code, even for duplicate URLs.
-- Expiration system for shortened URLs.
-- Redirects users to the original URL when accessing the shortened URL.
-- Displays a message if the link has expired.
-- Simple backend homepage with access to the Django admin panel.
-
-## Technology Choices
+## B. Technology Stack
 
 - **Backend**: Django (Python) with Django REST Framework.
 - **Frontend**: React (JavaScript) for submitting long URLs.
 - **Database**: SQLite (easy to set up for development, can be switched to PostgreSQL for production).
 - **Deployment**: Heroku (for the backend), Vercel (for the frontend)
-  
-## Setup Instructions
 
-### 1. Clone the repository
+---
+
+## C. Running the Project Locally
+
+### Prerequisites
+
+- Node.js installed (for frontend)
+- Python 3.12.5 or higher installed (for backend)
+
+### Setup Instructions
+
+#### 1. Clone the repository
+
+Run the following commands in your terminal
 
 ```bash
-git clone https://github.com/your-repo/url-shortener-backend.git
+git https://github.com/BinhPQ2/URL_Shortener.git
+cd url-shortener
+```
+
+##### 1.1. Frontend Setup (ReactJS)
+
+Open the `frontend`/`.env` file and change the `REACT_APP_API_URL` to point to your local backend. Change the line:
+
+```
+REACT_APP_API_URL = https://url-shorterner-binhpq-f721b6699005.herokuapp.com/api 
+```
+
+to 
+
+```
+REACT_APP_API_URL = http://127.0.0.1:8000/api
+```
+Next, in your terminal, type:
+
+```bash
+cd frontend
+npm install
+npm start
+```
+
+This will start the React frontend at `http://localhost:3000/`.
+
+##### 1.2. Backend Setup (Django)
+
+Navigate to the backend folder in your terminal and run:
+
+```bash
+cd backend
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+```
+
+This will start the Django backend at `http://127.0.0.1:8000`.
+
+---
+
+## D. Known Issues & Limitations
+
+- **Password Protection**: Not implemented. Users cannot set passwords for accessing certain URLs.
+- **Custom Short Codes**: The option for users to set their own custom short codes is not yet available.
+  
+---
+
+## E. Future Improvements
+
+- **Password Protection**: Allow users to protect shortened URLs with a password.
+- **Custom Short Codes**: Enable users to create custom short codes for easier sharing.
+- **URL Expiry Date**: Finish the features that let users to set an expiry date for their shortened URLs.
+- **Enhanced UI/UX**: Improve the frontend styling to offer a more polished and responsive user experience.
+- **Heroku PostgreSQL**: Optimize the application for production deployment on Heroku using PostgreSQL.
+- **Docker Container**: Create a Docker container for the application to streamline the development and deployment process.
