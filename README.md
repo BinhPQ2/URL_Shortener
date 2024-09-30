@@ -29,7 +29,13 @@ This project is a simple URL shortener with a ReactJS frontend and a Django back
 ### 3. Database:
 
 ✅ Store mappings between short codes and original URLs.
-✅ Save creation dates for each shortened URL.
+✅ Save creation dates for each shortened URL, accessible through the Admin page on Backend.
+
+##### Admin Access
+
+- **Username**: `admin`
+- **Password**: `admin`
+
 
 ### 4. Deployment:
 
