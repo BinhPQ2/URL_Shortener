@@ -9,26 +9,37 @@ This project is a simple URL shortener with a ReactJS frontend and a Django back
 ## A. Completed and Pending Features
 
 ✅ - Completed features
+
 ⚠️ - Works in progress
+
 ❌ - Have not implement
 
 ### 1. Frontend:
 
 ✅ Implement a form to submit long URLs.
+
 ✅ Display the generated short URL after submission.
+
 ✅ Include a "Copy to Clipboard" button for the short URL.
+
 ✅ Implement basic styling for a clean, responsive design.
+
 
 ### 2. Backend:
 
 ✅ Create an API endpoint to receive long URLs and return shortened versions.
+
 ✅ Implement a redirect service to handle requests for shortened URLs.
+
 ✅ Generate unique short codes for each submitted URL.
+
 ✅ Allow duplicate long URLs (each submission should create a new short URL).
+
 
 ### 3. Database:
 
 ✅ Store mappings between short codes and original URLs.
+
 ✅ Save creation dates for each shortened URL, accessible through the Admin page on Backend.
 
 ##### Admin Access
@@ -40,12 +51,15 @@ This project is a simple URL shortener with a ReactJS frontend and a Django back
 ### 4. Deployment:
 
 ✅ Deploy the application to a publicly accessible platform.
+
 ✅ Provide instructions for running the project locally (below).
 
 ### 5. Nice-to-have Features:
 
 ❌ Password Protection: Allow users to set a password for accessing certain shortened URLs.
-⚠️ URL Expiry Date: Enable users to set an expiration date for shortened URLs. (Currently the expired date is set to default of 60 seconds and user can't toggle it off)
+
+⚠️ URL Expiry Date: Enable users to set an expiration date for shortened URLs. (Currently the expired date is set to default of 60 seconds and user can't toggle it off).
+
 ❌ Custom Short Codes: Allow users to specify their own custom short codes.
 
 ---
@@ -79,7 +93,7 @@ cd url-shortener
 
 ##### 1.1. Frontend Setup (ReactJS)
 
-Open the `frontend`/`.env` file and change the `REACT_APP_API_URL` to point to your local backend. Change the line:
+Open the `frontend/.env` file and change the `REACT_APP_API_URL` to point to your local backend. Change the line:
 
 ```
 REACT_APP_API_URL = https://url-shorterner-binhpq-f721b6699005.herokuapp.com/api 
