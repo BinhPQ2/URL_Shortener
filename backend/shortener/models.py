@@ -21,7 +21,10 @@ class Url(models.Model):
 
     def generate_unique_short_code(self):
         """Generate a unique 6-character short code."""
-        short_code = ''.join(random.choices(string.ascii_letters + string.digits, k=6))
+        while True:
+            short_code = ''.join(random.choices(string.ascii_letters + string.digits, k=6))
+            if not Url.objects.filter(short_code=short_code).exists():
+                break  # Check if the generated short code already exists in the database. If unique, exit the loop and return the short code
         return short_code
 
     def __str__(self):
